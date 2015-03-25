@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!------------------------------------------
+AUTORES: Jaime Delgado y Juan Luis García
+------------------------------------------->
+<html>
+<head>
+	<title>eXtext</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>	
+
+	<link rel="stylesheet" type="text/css" href="css/ripples.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/material-wfont.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/xtext.css"/>
+	
+	<script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="js/jquery.mobile-1.4.5.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/material.min.js"></script>
+	<script type="text/javascript" src="js/ripples.min.js"></script>
+	<script type="text/javascript" src="Ckeditor/ckeditor.js"></script>
+	<script type="text/javascript" src="js/xtext.js"></script>
+</head>
+<body>
+<div class="container" id="contenedor">
+	<div class="row">
+		<div class="col-md-12">
+			<nav class="navbar navbar-fixed-top" role="navigation">
+				<div class="container-fluid" id="cnav-fixed-top">
+					<div class="navbar-header">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"></button>
+						<a class="navbar-brand">eXtext</a>
+					</div>	  
+				</div>
+			</nav>
+		</div>
+	</div>
+	<!----------------------------------------------------Página principal------------------------------------------------------------------------->
+	<div data-role="page" id="pagPrincipal">
+		<nav class="navbar navbar-default" role="navigation"></nav>
+		<div data-role="main" class="ui-content">
+			<textarea class="form-control" id="editor1" name="editor1"></textarea>
+		</div>
+
+		<nav class="navbar navbar-fixed-bottom" role="navigation" id="navBarAbajo">		
+			<div class="container-fluid" id="cnav-fixed-botom">		
+				<ul class="nav navbar-nav navbar">
+					
+					<li><p align="center"><a class="btn btn-primary btn-fab" href="#pagEnriquecido" id="bntArriba" data-transition="slideup"><span class="glyphicon glyphicon-chevron-up"></span></a>Enriquecer</p></li>
+				
+				</ul>	
+			</div>
+		</nav>
+
+	</div>
+	<!-------------------------------------------------------Página Enriquecido------------------------------------------------------------------->
+	<div data-role="page" id="pagEnriquecido">	
+	   <div data-role="main" class="ui-content">
+			<nav class="navbar navbar-default" role="navigation" id="navBarAux"></nav>
+
+			<nav class="navbar navbar-default" role="navigation" id="navBarArriba">		
+				<div class="container-fluid" id="cnav-fixed-botom">		
+					<ul class="nav navbar-nav navbar">
+					
+						<li><p align="center"><a class="btn btn-primary btn-fab btn-raised" href="#pagPrincipal" id="bntAbajo" data-transition="slidedown"><span class="glyphicon glyphicon-chevron-down"></span></a>Enriquecer</p></a></li>
+				
+					</ul>	
+				</div>
+			</nav>
+		
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<fieldset id="fieldPiezas">
+						
+					</fieldset>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6">
+					<fieldset  id="fieldAcciones">
+				
+					</fieldset>
+				</div>
+			</div>
+			<button type="button" class="btn btn-primary" id="btnAplicar">Aplicar</button>
+
+			<nav class="navbar navbar-fixed-bottom" role="navigation" id="navBarTabs">
+				<div class="tabbable tabs-below" role="tabpanel">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs nav-justified" role="tablist">
+						<li role="presentation" class="active"><a href="#piezas" aria-controls="piezas" role="tab" data-toggle="tab">Piezas</a></li>
+						<li role="presentation"><a href="#acciones" aria-controls="acciones" role="tab" data-toggle="tab">Acciones</a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane active" id="piezas">
+							<div class="row">
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnPalabras">P</button><p>Palabras</p>
+								</div>
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnNombres">N</button><p>Nombres</p>
+								</div>
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnVerbos">V</button><p>Verbos</p>
+								</div>
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnAdjetivos">A</button><p>Adjetivos</p>
+								</div>
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnPronombres">P</button><p>Pronombres</p>
+								</div>
+
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnDeterminantes">D</button><p>Determinantes</p>
+								</div>
+
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnAdverbios">A</button><p>Adverbios</p>
+								</div>
+		
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnConjunciones">C</button><p>Conjunciones</p>
+								</div>
+			
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnPreposiciones">P</button><p>Preposiciones</p>
+								</div>
+
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnInterjecciones">I</button><p>Interjecciones</p>
+								</div>
+
+							</div>
+						</div>
+					 	<div role="tabpanel" class="tab-pane" id="acciones">
+							<div class="row">
+								<div class="col-xs-2 col-sm-1 col-md-1">
+									<button type="button" class="btn btn-primary" id="btnSubrayar">S</button><p	>Subrayar</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+			
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>

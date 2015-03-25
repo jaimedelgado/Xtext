@@ -1,0 +1,100 @@
+body, html {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+.active{
+	border-bottom: 2px solid #18FFFF;
+}
+
+fieldset {
+	min-width: 0;
+	min-height: 3.5em;
+	padding: .0em .9em .9em;
+	margin: 2em;
+	border: 2px;
+	background: #fff;
+	box-shadow: 0 3px 10px rgba(0,0,0,.23),0 3px 10px rgba(0,0,0,.16);
+}
+
+#editor1 {
+	height: 42.14em;
+	width: 100%;
+	border: none;
+	text-indent: 1em;
+	margin-bottom: 0em;
+}
+
+.navbar {
+	margin-bottom: 0em;
+}
+
+.btn {
+		padding: 5px 20px;
+}
+
+#navBarAux {
+	background: white;
+	height: 2%;
+}
+
+#navBarTabs {
+	height: 50%;
+	max-height: 50%;
+	background: rgb(55, 58, 58);
+}
+
+#piezas {
+	border-bottom: rgb(209, 216, 216);
+}
+
+#acciones {
+	border-bottom: rgb(209, 216, 216);
+}
+
+.btn.btn-fab {
+	font-size: 1.4em;
+	box-shadow: none;
+}
+
+#cke_1_contents {
+	height: 55vh;
+}
+
+/*
+.cke_top, .cke_contents, .cke_bottom {
+	height: 42.14em;
+}*/
+
+/*Marco de arriba*/
+.cke_top {
+	background-image: -webkit-linear-gradient(top,#009587,#009587);
+	border-bottom: none;
+	-webkit-box-shadow: 0 0px 0 #009587 inset;
+	border-bottom: 0px solid #009587;
+}
+
+/*Marco de abajo*/
+.cke_bottom {
+	padding: none;
+	background: white;
+	border-top: none;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	
+}
+
+.cke_chrome {
+
+}
+
+.ui-content {
+	/*width: 100%;
+	height: 55%;
+	display: flex;
+	flex-row: row;*/
+	padding: 0em;
+	margin-top: 0%
+}
