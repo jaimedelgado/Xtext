@@ -4,7 +4,7 @@ AUTORES: Jaime Delgado y Juan Luis García
 ------------------------------------------->
 <html>
 <head>
-	<title>eXtext</title>
+	<title>X-Text</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.4.5.min.css"/>
@@ -29,16 +29,21 @@ AUTORES: Jaime Delgado y Juan Luis García
 			<nav class="navbar navbar-fixed-top" role="navigation">
 				<div class="container-fluid" id="cnav-fixed-top">
 					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"></button>
-						<a class="navbar-brand">eXtext</a>
-					</div>	  
+						<a class="navbar-brand" href="#pagPrincipal" onclick="hideAplicar()">X-Text</a>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<button type="button" class="btn btn-primary" id="btnAplicar"><span class="glyphicon glyphicon-ok">Aplicar</span></button>
+							<img src="css/images/ajax-loader.gif" id="loaderResp"/>
+						</li>
+					</ul>				
 				</div>
 			</nav>
 		</div>
 	</div>
 	<!----------------------------------------------------Página principal------------------------------------------------------------------------->
 	<div data-role="page" id="pagPrincipal">
-		<nav class="navbar navbar-default" role="navigation"></nav>
+		<nav class="navbar navbar-default" role="navigation"><a class="navbar-brand">|</a></nav>
 		<div data-role="main" class="ui-content">
 			<textarea class="form-control" id="editor1" name="editor1"></textarea>
 		</div>
@@ -47,7 +52,7 @@ AUTORES: Jaime Delgado y Juan Luis García
 			<div class="container-fluid" id="cnav-fixed-botom">		
 				<ul class="nav navbar-nav navbar">
 					
-					<li><p align="center"><a class="btn btn-primary btn-fab" href="#pagEnriquecido" id="bntArriba" data-transition="slideup"><span class="glyphicon glyphicon-chevron-up"></span></a>Enriquecer</p></li>
+					<li><p align="center"><a class="btn btn-warning btn-fab" href="#pagEnriquecido" id="bntArriba" data-transition="slideup" onclick="showAplicar()"><span class="glyphicon glyphicon-menu-up"></span></a>Enriquecer</p></li>
 				
 				</ul>	
 			</div>
@@ -57,85 +62,135 @@ AUTORES: Jaime Delgado y Juan Luis García
 	<!-------------------------------------------------------Página Enriquecido------------------------------------------------------------------->
 	<div data-role="page" id="pagEnriquecido">	
 	   <div data-role="main" class="ui-content">
-			<nav class="navbar navbar-default" role="navigation" id="navBarAux"></nav>
+			<nav class="navbar navbar-default" role="navigation" id="navBarAux"><a class="navbar-brand">|</a></nav>
 
 			<nav class="navbar navbar-default" role="navigation" id="navBarArriba">		
 				<div class="container-fluid" id="cnav-fixed-botom">		
 					<ul class="nav navbar-nav navbar">
 					
-						<li><p align="center"><a class="btn btn-primary btn-fab btn-raised" href="#pagPrincipal" id="bntAbajo" data-transition="slidedown"><span class="glyphicon glyphicon-chevron-down"></span></a>Enriquecer</p></a></li>
-				
+						<li><p align="center"><a class="btn btn-primary btn-fab btn-raised" href="#pagPrincipal" id="btnAbajo" data-transition="slidedown" onclick="hideAplicar()"><span class="glyphicon glyphicon-menu-down"></span></a>Enriquecer</p></a></li>	
 					</ul>	
 				</div>
 			</nav>
-		
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-6">
-					<fieldset id="fieldPiezas">
-						
-					</fieldset>
-				</div>
-				<div class="col-xs-6 col-sm-6 col-md-6">
-					<fieldset  id="fieldAcciones">
-				
-					</fieldset>
+
+			<div class="container" id="containerFilas">
+				<div class="row" id="fila0">
+					<div class="col-xs-5 col-sm-5 col-md-6">
+						<fieldset id="fieldPiezas0" onclick="selectBox('fieldPiezas', 0, 'P')"></fieldset>					
+					</div>
+					<div class="col-xs-5 col-sm-5 col-md-5">
+						<fieldset id="fieldAcciones0" onclick="selectBox('fieldAcciones', 0, 'A')"></fieldset>
+					</div>
+					<div class="col-xs-2 col-sm-2 col-md-1">
+						<button type="button" class="btn btn-success btn-fab btn-raised" id="btnDeshacer0" onclick="undoRow(0)">
+							<span class="glyphicon glyphicon-minus"></span>
+						</button>
+					</div>
 				</div>
 			</div>
-			<button type="button" class="btn btn-primary" id="btnAplicar">Aplicar</button>
+
+			<!--<table class="table">
+				<tbody>
+					<tr>
+						<td><fieldset id="fieldPiezas0" onclick="selectBox('fieldPiezas', '0', 'P')"></fieldset></td>
+						<td><button type="button" class="btn btn-primary btn-fab" id="btnEliminar0" onclick="DeleteRow('0')"><span class="glyphicon glyphicon-remove"></span></button></td>						
+						<td><fieldset id="fieldAcciones0" onclick="selectBox('fieldAcciones', '0','A')" onmouseover="BoxResalt()" onmouseout="BoxNoResalt()"></fieldset></td>
+					</tr>				
+				</tbody>
+			</table>-->
+			<button type="button" class="btn btn-primary btn-fab btn-raised" id="masFilas"><span class="glyphicon glyphicon-plus"></span></button>
 
 			<nav class="navbar navbar-fixed-bottom" role="navigation" id="navBarTabs">
 				<div class="tabbable tabs-below" role="tabpanel">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs nav-justified" role="tablist">
-						<li role="presentation" class="active"><a href="#piezas" aria-controls="piezas" role="tab" data-toggle="tab">Piezas</a></li>
-						<li role="presentation"><a href="#acciones" aria-controls="acciones" role="tab" data-toggle="tab">Acciones</a></li>
+						<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6">						
+						<li role="presentation" class="active" id="tabPiezas"><a href="#piezas" aria-controls="piezas" role="tab" data-toggle="tab" id="titlePiezas">Piezas</a></li>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6">		
+						<li role="presentation" id="tabAcciones"><a href="#acciones" aria-controls="acciones" role="tab" data-toggle="tab" id="titleAcciones">Acciones</a></li>
+						</div>
+						</div>
 					</ul>
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="piezas">
+							<!--<div class="table-responsive">
+									<table class="table">
+									</table>
+								 </div>-->
 							<div class="row">
 								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnPalabras">P</button><p>Palabras</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnNombres">Nb</button><p>Nombres</p>
 								</div>
 								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnNombres">N</button><p>Nombres</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnVerbos">Vb</button><p>Verbos</p>
 								</div>
 								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnVerbos">V</button><p>Verbos</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnAdjetivos">Aj</button><p>Adjetivos</p>
 								</div>
 								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnAdjetivos">A</button><p>Adjetivos</p>
-								</div>
-								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnPronombres">P</button><p>Pronombres</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnPronombres">Pn</button><p>Pronombres</p>
 								</div>
 
 								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnDeterminantes">D</button><p>Determinantes</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnDeterminantes">Dt</button><p>Determinantes</p>
 								</div>
 
 								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnAdverbios">A</button><p>Adverbios</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnAdverbios">Av</button><p>Adverbios</p>
 								</div>
 		
 								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnConjunciones">C</button><p>Conjunciones</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnConjunciones">Cj</button><p>Conjunciones</p>
 								</div>
 			
 								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnPreposiciones">P</button><p>Preposiciones</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnPreposiciones">Pp</button><p>Preposiciones</p>
 								</div>
 
 								<div class="col-xs-2 col-sm-2 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnInterjecciones">I</button><p>Interjecciones</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnInterjecciones">Ij</button><p>Interjecciones</p>
 								</div>
-
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnPalDificiles">Pd</button><p>Palabras difíciles</p>
+								</div>
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnNumeral">Nº</button><p>Numeros</p>
+								</div>
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnFechaHora">Fh</button><p>Fecha y hora</p>
+								</div>
+								<div class="col-xs-2 col-sm-2 col-md-1">
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnPuntuacion">Sp</button>
+								</div>
 							</div>
 						</div>
 					 	<div role="tabpanel" class="tab-pane" id="acciones">
 							<div class="row">
 								<div class="col-xs-2 col-sm-1 col-md-1">
-									<button type="button" class="btn btn-primary" id="btnSubrayar">S</button><p	>Subrayar</p>
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnSubrayar">Sb</button><p>Subrayar</p>
+								</div>
+								<!--<div class="col-xs-2 col-sm-1 col-md-1"></div>-->
+								<div class="col-xs-2 col-sm-1 col-md-1">
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnAMorfo">Mf</button><p>Análisis morfológico</p>
+								</div>
+								<!--<div class="col-xs-2 col-sm-1 col-md-1"></div>-->
+								<div class="col-xs-2 col-sm-1 col-md-1">
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnSinonimo">Si</button><p>Sinónimos</p>
+								</div>
+								<!--<div class="col-xs-2 col-sm-1 col-md-1"></div>-->
+								<div class="col-xs-2 col-sm-1 col-md-1">
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnAntonimo">An</button><p>Antónimos</p>
+								</div>
+								<!--<div class="col-xs-2 col-sm-1 col-md-1"></div>-->
+								<div class="col-xs-2 col-sm-1 col-md-1">
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnDefinicion">Df</button><p>Definiciones</p>
+								</div>
+								<!--<div class="col-xs-2 col-sm-1 col-md-1"></div>-->
+								<div class="col-xs-2 col-sm-1 col-md-1">
+									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnTraduccion">Ti</button><p>Traducción a inglés</p>
 								</div>
 							</div>
 						</div>
