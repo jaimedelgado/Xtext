@@ -30,13 +30,7 @@ AUTORES: Jaime Delgado y Juan Luis García
 				<div class="container-fluid" id="cnav-fixed-top">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="#pagPrincipal" onclick="hideAplicar()">X-Text</a>
-					</div>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<button type="button" class="btn btn-primary" id="btnAplicar"><span class="glyphicon glyphicon-ok">Aplicar</span></button>
-							<img src="css/images/ajax-loader.gif" id="loaderResp"/>
-						</li>
-					</ul>				
+					</div>	
 				</div>
 			</nav>
 		</div>
@@ -52,7 +46,7 @@ AUTORES: Jaime Delgado y Juan Luis García
 			<div class="container-fluid" id="cnav-fixed-botom">		
 				<ul class="nav navbar-nav navbar">
 					
-					<li><p align="center"><a class="btn btn-warning btn-fab" href="#pagEnriquecido" id="bntArriba" data-transition="slideup" onclick="showAplicar()"><span class="glyphicon glyphicon-menu-up"></span></a>Enriquecer</p></li>
+					<li><p><a class="btn btn-warning btn-fab" href="#pagEnriquecido" id="bntArriba" data-transition="slideup" onclick="showAplicar()"><span class="glyphicon glyphicon-menu-up"></span></a>Enriquecer</p></li>
 				
 				</ul>	
 			</div>
@@ -68,10 +62,12 @@ AUTORES: Jaime Delgado y Juan Luis García
 				<div class="container-fluid" id="cnav-fixed-botom">		
 					<ul class="nav navbar-nav navbar">
 					
-						<li><p align="center"><a class="btn btn-primary btn-fab btn-raised" href="#pagPrincipal" id="btnAbajo" data-transition="slidedown" onclick="hideAplicar()"><span class="glyphicon glyphicon-menu-down"></span></a>Enriquecer</p></a></li>	
-					</ul>	
+						<li><p><a class="btn btn-primary btn-fab btn-raised" href="#pagPrincipal" id="btnAbajo" data-transition="slidedown" onclick="hideAplicar()"><span class="glyphicon glyphicon-menu-down"></span></a>Enriquecer</p></li>	
+					</ul>
 				</div>
 			</nav>
+
+			<button type="button" class="btn btn-primary" id="btnAplicar">APLICAR</button>
 
 			<div class="container" id="containerFilas">
 				<div class="row" id="fila0">
@@ -89,16 +85,18 @@ AUTORES: Jaime Delgado y Juan Luis García
 				</div>
 			</div>
 
-			<!--<table class="table">
-				<tbody>
-					<tr>
-						<td><fieldset id="fieldPiezas0" onclick="selectBox('fieldPiezas', '0', 'P')"></fieldset></td>
-						<td><button type="button" class="btn btn-primary btn-fab" id="btnEliminar0" onclick="DeleteRow('0')"><span class="glyphicon glyphicon-remove"></span></button></td>						
-						<td><fieldset id="fieldAcciones0" onclick="selectBox('fieldAcciones', '0','A')" onmouseover="BoxResalt()" onmouseout="BoxNoResalt()"></fieldset></td>
-					</tr>				
-				</tbody>
-			</table>-->
 			<button type="button" class="btn btn-primary btn-fab btn-raised" id="masFilas"><span class="glyphicon glyphicon-plus"></span></button>
+
+			<div class="modal fade" id="myModal">
+			  <div class="modal-dialog">
+				 <div class="modal-content">
+					<div class="modal-body">
+						<p align="center"><img src="css/images/loading51.gif"/></p>
+						<p align="center">Procesando...</p>
+					</div>
+				 </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
 
 			<nav class="navbar navbar-fixed-bottom" role="navigation" id="navBarTabs">
 				<div class="tabbable tabs-below" role="tabpanel">
@@ -110,10 +108,6 @@ AUTORES: Jaime Delgado y Juan Luis García
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div role="tabpanel" class="tab-pane active" id="piezas">
-							<!--<div class="table-responsive">
-									<table class="table">
-									</table>
-								 </div>-->
 							<div class="row">
 								<div class="col-xs-2 col-sm-2 col-md-1">
 									<button type="button" class="btn btn-primary btn-fab btn-raised" id="btnNombres">Nb</button><p>Nombres</p>

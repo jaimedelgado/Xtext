@@ -629,8 +629,7 @@ $(document).ready(function() {
 		}
 		else{
 			hideAplicar();
-			$("#loaderResp").show();
-			
+						
 			//if(firstAplicar){
 			texto = GetContents();
 			//	firstAplicar = false;
@@ -681,14 +680,20 @@ $(document).ready(function() {
 			}
 
 			if(entrado){
+				var options = {
+		    		"backdrop" : "static"
+				}
+					
+				$('#myModal').modal(options);
+				$('#myModal').modal('show');
+				
 				var msg = {texto: texto, filas: filasJson};
 				//alert(msg);
 				var objmsg = JSON.stringify(msg);
 				//alert(objmsg);
-				var uri = "http://sesat.fdi.ucm.es:8080/xtextwsprueba/rest/XtextWS/chooseService";
+				var uri = "http://sesat.fdi.ucm.es:8080/xtextws/rest/XtextWS/chooseService";
 						
 				$.ajax({
-					async:false,
 					type: "POST",
 					url: uri,
 					contentType: "application/json; charset=UTF-8",
@@ -699,15 +704,15 @@ $(document).ready(function() {
 						//}
 						//else{
 						SetContents(resp);
+						$('#myModal').modal('hide');
+						$.mobile.changePage("#pagPrincipal", "slidedown");
 						//}
 					},
 					error: function(e) {
 						alert("Error: " + e);
 					}
 				});
-				$.mobile.changePage("#pagPrincipal", "slidedown");
 			}
-			$("#loaderResp").hide();
 			hideAplicar();
 		}
 	});
